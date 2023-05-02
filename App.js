@@ -1,9 +1,9 @@
 import React from 'react';
 
-import LoginScreen from 'src/components/screens/LoginScreen';
+import PrivateNavigator from 'src/navigation/private/PrivateNavigator';
 
 const App = () => {
-  return <LoginScreen />;
+  return <PrivateNavigator />;
 };
 
 export default App;
