@@ -1,11 +1,9 @@
-import React from 'react'
-import {SafeAreaView,Text} from 'react-native'
+import React from 'react';
 
-const App = () =>{
-    return (
-    <SafeAreaView>
-        <Text> APP.js</Text>
-    </SafeAreaView>)
-}
+import LoginScreen from 'src/components/screens/LoginScreen';
 
-export default App
+const App = () => {
+  return <LoginScreen />;
+};
+
+export default App;
