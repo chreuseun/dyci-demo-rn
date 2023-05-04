@@ -13,10 +13,16 @@ import FlashMessage,{showMessage} from 'react-native-flash-message';
 import {MAIN} from 'src/styles/colors'
 import {usePOSTLogin} from 'src/hooks/APIs/authorization'
 import {LoadingModal} from 'src/components/common'
+import {useAppZustandStore} from 'src/zustand'
 
 const USERNAME_PLACEHOLDER = 'Username'
 
 const LoginScreen = () => {
+
+  const {
+    updateAppIsAuthorized
+  } =  useAppZustandStore(state => state)
+
   const {
     isPOSTLoginLoading,
     runHTTPPostLogin
@@ -30,6 +36,8 @@ const LoginScreen = () => {
           description: "Login Successful",
           type: "success",
         });
+
+        updateAppIsAuthorized(true)
       }else{
         showMessage({
           message: "Login Error",

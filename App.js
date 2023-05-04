@@ -3,6 +3,8 @@ import React,{useEffect} from 'react';
 import {SplashScreen} from 'src/components/screens'
 import {useAppZustandStore} from 'src/zustand'
 import PublicNavigator from 'src/navigation/public/PublicNavigator';
+import PrivateNavigator from 'src/navigation/private/PrivateNavigator';
+
 
 const App = () => {
   const {isAuthorizing,isAuthorized,updateAppIsAuthorized,updateAppIsAuthorizing} = useAppZustandStore(s => s)
@@ -21,7 +23,7 @@ const App = () => {
   }
 
   if(isAuthorized){
-    return null
+    return <PrivateNavigator/>
   }
 
 
