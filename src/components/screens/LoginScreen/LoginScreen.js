@@ -7,6 +7,8 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
+import FlashMessage,{showMessage} from 'react-native-flash-message';
+
 
 import {MAIN} from 'src/styles/colors'
 import {usePOSTLogin} from 'src/hooks/APIs/authorization'
@@ -15,11 +17,38 @@ import {LoadingModal} from 'src/components/common'
 const USERNAME_PLACEHOLDER = 'Username'
 
 const LoginScreen = () => {
-  const {isPOSTLoginLoading,runHTTPPostLogin} = usePOSTLogin()
+  const {
+    isPOSTLoginLoading,
+    runHTTPPostLogin
+  } = usePOSTLogin({
+    onCompleted:  data => {
+      const {success,error_message=''} = data || {}
+
+      if(success){
+        showMessage({
+          message: "Success",
+          description: "Login Successful",
+          type: "success",
+        });
+      }else{
+        showMessage({
+          message: "Login Error",
+          description: `${error_message}`,
+          type: "danger",
+        });
+      }
+    },
+    onError: error => {
+      showMessage({
+        message: "Login Error",
+        description: `${error}`,
+        type: "danger",
+      });
+    }
+  })
   const [username, setUsername]  =useState('')
 
   const onPressLogin = () => {
-    console.log('--- THIS THE USERNAME: ', username)
     runHTTPPostLogin({username})
   }
 
@@ -47,6 +76,7 @@ const LoginScreen = () => {
         </View>
       </TouchableOpacity>
       <LoadingModal show={isPOSTLoginLoading}/>
+      <FlashMessage position="top" />
     </SafeAreaView>
   );
 };
@@ -68,9 +98,24 @@ const styles = StyleSheet.create({
     marginTop:4,
     borderColor:'gray'
   },
-  textInpContainer:{flex:1, justifyContent:"center", alignItems:'center',width:'100%', },
-  buttonContainer:{backgroundColor:MAIN,width:250, padding:16, borderRadius:20,},
-  loginText:{fontWeight:'bold', fontSize:20,textAlign:'center', color:'#FFF',},
+  textInpContainer:{
+    flex:1,
+    justifyContent:"center", 
+    alignItems:'center',
+    width:'100%', 
+  },
+  buttonContainer:{
+    backgroundColor:MAIN,
+    width:250,
+    padding:16, 
+    borderRadius:20,
+  },
+  loginText:{
+    fontWeight:'bold', 
+    fontSize:20,
+    textAlign:'center', 
+    color:'#FFF',
+  },
   title: {
     fontSize:40,
     fontWeight:'bold',

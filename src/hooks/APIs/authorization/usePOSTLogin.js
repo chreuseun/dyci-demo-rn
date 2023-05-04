@@ -1,17 +1,20 @@
 import {useHTTPPost} from 'src/hooks/axios'
 import {ENDPOINTS} from 'src/constants/endpoints'
 
-const usePOSTLogin = () => {
+const usePOSTLogin = ({
+    onCompleted = () =>{},
+    onError = ()=>{}
+}) => {
     const {
         isPOSTRequestLoading: isPOSTLoginLoading,
         runHTTPPostRequest
     } = useHTTPPost({
             url:ENDPOINTS.LOGIN,
             onCompleted: data => {
-                console.log('--- LOGIN SUCCESSFUL: ', JSON.stringify(data?.data,null,4))
+                onCompleted(data?.data)
             },
             onError: error => {
-                console.log('--- LOGIN ERROR: ', error)
+                onError(error)
             }
     })
 
