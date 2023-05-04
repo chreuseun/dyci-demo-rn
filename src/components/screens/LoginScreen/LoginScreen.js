@@ -28,6 +28,7 @@ const LoginScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.textInpContainer}>
+        <Text style={styles.title}>SVMS</Text>
         <TextInput 
           onChangeText={onUsernameChange} 
           style={styles.textInput} 
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     padding:24
   },
   textInput: {
-    borderWidth:6,
+    borderWidth:2,
     width:'100%',
     borderRadius:20,
     paddingHorizontal:16,
@@ -64,7 +65,13 @@ const styles = StyleSheet.create({
   },
   textInpContainer:{flex:1, justifyContent:"center", alignItems:'center',width:'100%', },
   buttonContainer:{backgroundColor:MAIN,width:250, padding:16, borderRadius:20,},
-  loginText:{fontWeight:'bold', fontSize:20,textAlign:'center', color:'#FFF',}
+  loginText:{fontWeight:'bold', fontSize:20,textAlign:'center', color:'#FFF',},
+  title: {
+    fontSize:40,
+    fontWeight:'bold',
+    color:'#272727',
+    marginBottom:8
+  }
 })
 
 export default LoginScreen;
