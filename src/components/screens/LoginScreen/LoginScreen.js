@@ -10,6 +10,7 @@ import {
 
 import {MAIN} from 'src/styles/colors'
 import {usePOSTLogin} from 'src/hooks/APIs/authorization'
+import {LoadingModal} from 'src/components/common'
 
 const USERNAME_PLACEHOLDER = 'Username'
 
@@ -31,7 +32,7 @@ const LoginScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.textInpContainer}>
-        <Text style={styles.title}>SVMS {isPOSTLoginLoading ? 'T': 'F'}</Text>
+        <Text style={styles.title}>SVMS</Text>
         <TextInput 
           onChangeText={onUsernameChange} 
           style={styles.textInput} 
@@ -45,6 +46,7 @@ const LoginScreen = () => {
           </Text>
         </View>
       </TouchableOpacity>
+      <LoadingModal show={isPOSTLoginLoading}/>
     </SafeAreaView>
   );
 };
