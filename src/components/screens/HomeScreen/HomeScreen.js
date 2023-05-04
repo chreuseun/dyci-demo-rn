@@ -1,14 +1,14 @@
 import React from 'react'
 
-import {SafeAreaView,Text} from 'react-native'
+import {Text} from 'react-native'
+
+import {PrivateTemplate} from 'src/components/templates'
 
 const HomeScreen = () => {
     return (
-        <SafeAreaView style={{flex:1}}>
-            <Text>
-                THIS IS HOME SCREEN
-            </Text>
-        </SafeAreaView>)
+        <PrivateTemplate title='Home'>
+        </PrivateTemplate>
+    )
 }
 
 export default HomeScreen

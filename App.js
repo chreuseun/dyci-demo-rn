@@ -3,22 +3,22 @@ import React,{useEffect} from 'react';
 import {SplashScreen} from 'src/components/screens'
 import {useAppZustandStore} from 'src/zustand'
 import PublicNavigator from 'src/navigation/public/PublicNavigator';
-import PrivateNavigator from 'src/navigation/private/PrivateNavigator';
 import {ACCESS_TOKEN} from 'src/constants/keys'
 import {mmkvGetString} from 'src/utils/mmkv'
+import DrawerNavigation from 'src/navigation/private/DrawerNavigation'
 
 
 const App = () => {
-  const {isAuthorizing,isAuthorized,updateAppIsAuthorized,updateAppIsAuthorizing} = useAppZustandStore(s => s)
+  const {
+    isAuthorizing,
+    isAuthorized,
+    updateAppIsAuthorized,
+    updateAppIsAuthorizing
+  } = useAppZustandStore(s => s)
 
   useEffect(()=>{
-
-  
-
-
     setTimeout(()=>{
       const jwt=  mmkvGetString(ACCESS_TOKEN)
-
 
       if(!!jwt){
         updateAppIsAuthorized(true)
@@ -30,15 +30,17 @@ const App = () => {
     },3000)
   }, [])
 
+  // Public part of the app
   if(!isAuthorizing && !isAuthorized){
     return <PublicNavigator/>
   }
 
+  // Private part of the app
   if(isAuthorized){
-    return <PrivateNavigator/>
+    return <DrawerNavigation/>
   }
 
-
+  // DEFAULT TO DISPLAY
   return <SplashScreen/>
 
 
