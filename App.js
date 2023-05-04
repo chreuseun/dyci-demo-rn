@@ -4,17 +4,29 @@ import {SplashScreen} from 'src/components/screens'
 import {useAppZustandStore} from 'src/zustand'
 import PublicNavigator from 'src/navigation/public/PublicNavigator';
 import PrivateNavigator from 'src/navigation/private/PrivateNavigator';
+import {ACCESS_TOKEN} from 'src/constants/keys'
+import {mmkvGetString} from 'src/utils/mmkv'
 
 
 const App = () => {
   const {isAuthorizing,isAuthorized,updateAppIsAuthorized,updateAppIsAuthorizing} = useAppZustandStore(s => s)
 
   useEffect(()=>{
-    console.log('--- APP START')
+
+  
+
 
     setTimeout(()=>{
-      // checking if user is logged in else display LOGIN SCREEN
-      updateAppIsAuthorizing(false)
+      const jwt=  mmkvGetString(ACCESS_TOKEN)
+
+
+      if(!!jwt){
+        updateAppIsAuthorized(true)
+        updateAppIsAuthorizing(false)
+      }else{
+        updateAppIsAuthorized(false)
+        updateAppIsAuthorizing(false)
+      }
     },3000)
   }, [])
 
