@@ -12,7 +12,12 @@ const PrivateNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={HOME}>
-        <Stack.Screen name={HOME} component={HomeScreen} />
+        <Stack.Screen 
+          name={HOME} 
+          component={HomeScreen} 
+          options={{
+            headerShown:false
+          }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
