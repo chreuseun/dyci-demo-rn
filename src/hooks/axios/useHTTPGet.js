@@ -18,6 +18,7 @@ const useHTTPGet = ({ onCompleted = () => {}, onError = () => {}, url = '' } = {
       const { error_message: serverErrMessage } = getRequestResponse?.data || {};
 
       if (serverErrMessage === 'Error: Invalid Authorization Token') {
+        initiateLogout()
   
         return;
       }
@@ -31,6 +32,7 @@ const useHTTPGet = ({ onCompleted = () => {}, onError = () => {}, url = '' } = {
       }
 
       if (getRequestError?.response?.status === 401) {
+        initiateLogout()
       }
     }
 
