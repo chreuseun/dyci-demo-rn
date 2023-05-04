@@ -14,6 +14,8 @@ import {MAIN} from 'src/styles/colors'
 import {usePOSTLogin} from 'src/hooks/APIs/authorization'
 import {LoadingModal} from 'src/components/common'
 import {useAppZustandStore} from 'src/zustand'
+import {mmkvSet} from 'src/utils/mmkv'
+import {ACCESS_TOKEN, STUDENT_PROFILE} from 'src/constants/keys'
 
 const USERNAME_PLACEHOLDER = 'Username'
 
@@ -27,8 +29,12 @@ const LoginScreen = () => {
     isPOSTLoginLoading,
     runHTTPPostLogin
   } = usePOSTLogin({
-    onCompleted:  data => {
-      const {success,error_message=''} = data || {}
+    onCompleted:  responseData => {
+      const {success,error_message='',data} = responseData || {}
+      const {
+        jwt_token:jwtToken = '', 
+        student = {}
+      } = data || {}
 
       if(success){
         showMessage({
@@ -37,6 +43,15 @@ const LoginScreen = () => {
           type: "success",
         });
 
+        mmkvSet({
+          key: ACCESS_TOKEN,
+          value:jwtToken
+        })
+        mmkvSet({
+          key: STUDENT_PROFILE,
+          value:JSON.stringify(student)
+        })
+        
         updateAppIsAuthorized(true)
       }else{
         showMessage({
