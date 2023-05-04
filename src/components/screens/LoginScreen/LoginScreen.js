@@ -9,14 +9,17 @@ import {
 } from 'react-native';
 
 import {MAIN} from 'src/styles/colors'
+import {usePOSTLogin} from 'src/hooks/APIs/authorization'
 
 const USERNAME_PLACEHOLDER = 'Username'
 
 const LoginScreen = () => {
+  const {isPOSTLoginLoading,runHTTPPostLogin} = usePOSTLogin()
   const [username, setUsername]  =useState('')
 
   const onPressLogin = () => {
     console.log('--- THIS THE USERNAME: ', username)
+    runHTTPPostLogin({username})
   }
 
   const onUsernameChange = (text) => {
@@ -28,7 +31,7 @@ const LoginScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.textInpContainer}>
-        <Text style={styles.title}>SVMS</Text>
+        <Text style={styles.title}>SVMS {isPOSTLoginLoading ? 'T': 'F'}</Text>
         <TextInput 
           onChangeText={onUsernameChange} 
           style={styles.textInput} 
