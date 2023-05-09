@@ -1,11 +1,10 @@
-import React from 'react'
-import {SafeAreaView,Text} from 'react-native'
+import React from 'react';
+import {SafeAreaView, Text} from 'react-native';
 
-const App = () =>{
-    return (
-    <SafeAreaView>
-        <Text> APP.js</Text>
-    </SafeAreaView>)
-}
+import StackNavigator from './src/navigations/StackNavigator';
 
-export default App
+const App = () => {
+  return <StackNavigator />;
+};
+
+export default App;
