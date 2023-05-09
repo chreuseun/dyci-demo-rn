@@ -1,5 +1,4 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
 
 import StackNavigator from './src/navigations/StackNavigator';
 
